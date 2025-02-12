@@ -3,7 +3,7 @@
 add_newline = true
 continuation_prompt = "[▸▹ ](dimmed white)"
 
-format = """($nix_shell$container$fill$git_metrics\n)$cmd_duration\
+format = """($container$fill$git_metrics\n)$cmd_duration\
 $hostname\
 $localip\
 $shlvl\
@@ -12,18 +12,19 @@ $env_var\
 $jobs\
 $sudo\
 $username\
-$character"""
-
-right_format = """
-$singularity\
-$kubernetes\
+$character\
 $directory\
-$vcsh\
-$fossil_branch\
 $git_branch\
 $git_commit\
 $git_state\
 $git_status\
+"""
+
+right_format = """
+$singularity\
+$kubernetes\
+$vcsh\
+$fossil_branch\
 $hg_branch\
 $pijul_channel\
 $docker_context\
@@ -122,7 +123,7 @@ home_symbol = "~"
 read_only = " r-only"
 use_os_path_sep = true
 style = "italic"
-format = '[$path]($style)[$read_only]($read_only_style)'
+format = '[$path]($style)[$read_only]($read_only_style) '
 repo_root_style = 'bold #DA627D'
 repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style)'
 
@@ -167,7 +168,7 @@ threshold = 70
 style = "italic dimmed green"
 
 [git_branch]
-format = " [$symbol $branch]($style)"
+format = " [$symbol $branch ]($style)"
 symbol = ""
 style = "#FCA17D"
 # truncation_symbol = "⋯"
@@ -183,7 +184,7 @@ disabled = false
 
 [git_status]
 style = "bold"
-format = "( [$ahead_behind$staged$modified$untracked$renamed$deleted$conflicted$stashed]($style))"
+format = "([$ahead_behind$staged$modified$untracked$renamed$deleted$conflicted$stashed ]($style))"
 conflicted = "[!!](italic bright-magenta)"
 ahead = "[▴ [${count}](bold white)│](italic green)"
 behind = "[▿ [${count}](bold white)│](italic red)"
@@ -208,7 +209,7 @@ style = "bold bright-yellow"
 [nodejs]
 format = " [node](italic) [($version)](bold bright-green)"
 version_format = "${raw}"
-detect_files = ["package-lock.json", "yarn.lock"]
+detect_files = ["package-lock.json", "yarn.lock", "bun.lockb", "pnpm-lock.yaml"]
 detect_folders = ["node_modules"]
 detect_extensions = []
 
@@ -281,7 +282,7 @@ symbol = "∩ "
 format = " go [$symbol($version )]($style)"
 
 [haskell]
-symbol = "❯λ " 
+symbol = "❯λ "
 format = " hs [$symbol($version )]($style)"
 
 [java]
@@ -299,15 +300,3 @@ format = " mem [${ram}( ${swap})]($style)"
 [nim]
 symbol = "▴▲▴ "
 format = " nim [$symbol($version )]($style)"
-
-[nix_shell]
-style = 'bold italic dimmed blue'
-symbol = '✶'
-format = '[$symbol nix⎪$state⎪]($style) [$name](italic dimmed white)'
-impure_msg = '[⌽](bold dimmed red)'
-pure_msg = '[⌾](bold dimmed green)'
-unknown_msg = '[◌](bold dimmed ellow)'
-
-[spack]
-symbol = "◇ "
-format = " spack [$symbol$environment]($style)"
