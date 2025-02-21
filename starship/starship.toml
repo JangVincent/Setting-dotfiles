@@ -1,233 +1,169 @@
-# version: 1.0.0
+"$schema" = 'https://starship.rs/config-schema.json'
 
-add_newline = true
-continuation_prompt = "[▸▹ ](dimmed white)"
-
-format = """($container$fill$git_metrics\n)$cmd_duration\
-$hostname\
-$localip\
-$shell\
-$jobs\
-$sudo\
+format = """
+[](color_orange)\
+$os\
 $username\
+[](bg:color_yellow fg:color_orange)\
 $directory\
+[](fg:color_yellow bg:color_aqua)\
 $git_branch\
-$git_commit\
-$git_state\
 $git_status\
-$line_break\
-$character\
-"""
-
-right_format = """
-$kubernetes\
-$hg_branch\
-$docker_context\
-$package\
+[](fg:color_aqua bg:color_blue)\
 $c\
-$cmake\
-$dart\
-$deno\
+$rust\
 $golang\
-$haskell\
-$helm\
+$nodejs\
+$php\
 $java\
 $kotlin\
-$gradle\
-$lua\
-$nim\
-$nodejs\
+$haskell\
 $python\
-$ruby\
-$rust\
-$solidity\
-$swift\
-$terraform\
-$zig\
-$memory_usage\
-$custom\
-$status\
-$os\
-$battery\
+[](fg:color_blue bg:color_bg3)\
+$docker_context\
+$conda\
+[](fg:color_bg3 bg:color_bg1)\
 $time\
-"""
+[ ](fg:color_bg1)\
+$line_break$character"""
 
-# Left prompt
-[fill]
-symbol = ' '
+palette = 'gruvbox_dark'
 
-[git_metrics]
-format = '([▴$added]($added_style))([▿$deleted]($deleted_style))'
-added_style = 'italic dimmed green'
-deleted_style = 'italic dimmed red'
-ignore_submodules = true
+[palettes.gruvbox_dark]
+color_fg0 = '#fbf1c7'
+color_bg1 = '#3c3836'
+color_bg3 = '#665c54'
+color_blue = '#458588'
+color_aqua = '#689d6a'
+color_green = '#98971a'
+color_orange = '#d65d0e'
+color_purple = '#b16286'
+color_red = '#cc241d'
+color_yellow = '#d79921'
+
+[os]
 disabled = false
+style = "bg:color_orange fg:color_fg0"
 
-[cmd_duration]
-format = "[◄ $duration ](italic white)"
-
-[localip]
-ssh_only = true
-format = " ◯[$localipv4](bold magenta)"
-disabled = false
-
-[jobs]
-format = "[$symbol$number]($style) "
-style = "white"
-symbol = "[▶](blue italic)"
-
-[sudo]
-format = "[$symbol]($style)"
-style = "bold italic bright-purple"
-symbol = "⋈┈"
-disabled = false
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = "󰀵"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+EndeavourOS = ""
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+Pop = ""
 
 [username]
-style_user = "bright-yellow bold italic"
-style_root = "purple bold italic"
-format = "[⭘ $user]($style) "
-disabled = false
 show_always = true
+style_user = "bg:color_orange fg:color_fg0"
+style_root = "bg:color_orange fg:color_fg0"
+format = '[ $user ]($style)'
 
 [directory]
-home_symbol = "~"
-read_only = " r-only"
-use_os_path_sep = true
-style = "italic"
-format = '[$path]($style)[$read_only]($read_only_style) '
-repo_root_style = 'bold #DA627D'
-repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style)'
+style = "fg:color_fg0 bg:color_yellow"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"Developer" = "󰲋 "
 
 [git_branch]
-format = " [$symbol $branch ]($style)"
 symbol = ""
-style = "#FCA17D"
+style = "bg:color_aqua"
+format = '[[ $symbol $branch ](fg:color_fg0 bg:color_aqua)]($style)'
 
 [git_status]
-style = "bold"
-format = "([$ahead_behind$staged$modified$untracked$renamed$deleted$conflicted$stashed ]($style))"
-conflicted = "[!!](italic bright-magenta)"
-ahead = "[▴ [${count}](bold white)│](italic green)"
-behind = "[▿ [${count}](bold white)│](italic red)"
-diverged = "[◇ ▴[${ahead_count}](regular white)│▿[${behind_count}](regular white)│](italic bright-magenta)"
-untracked = "[ ${count} ](italic bright-yellow)"
-stashed = "[](italic white)"
-modified = "[+ ${count} ](italic yellow)"
-staged = "[ [$count](bold white) ](italic bright-cyan)"
-renamed = "[󰑕](italic bright-blue)"
-deleted = "[✕](italic red)"
-
-[character]
-format = "$symbol "
-success_symbol = "[>](bold bright-blue)"
-error_symbol = "[○](italic purple)"
-vimcmd_symbol = "[■](italic dimmed green)"
-
-
-# Right prompt
-
-[docker_context]
-symbol = " "
-format = " [$symbol$context]($style)"
-
-[package]
-format = " [pkg](italic dimmed) [$symbol$version]($style)"
-version_format = "${raw}"
-symbol = "◨ "
-style = "dimmed yellow italic bold"
-
-[c]
-symbol = "ℂ "
-format = " [$symbol($version(-$name))]($style)"
-
-[dart]
-symbol = "◁◅ "
-format = " dart [$symbol($version )]($style)"
-
-[deno]
-format = " [deno](italic) [∫ $version](green bold)"
-version_format = "${raw}"
-
-[golang]
-symbol = "∩ "
-format = " go [$symbol($version )]($style)"
-
-[haskell]
-symbol = "❯λ " 
-format = " hs [$symbol($version )]($style)"
-
-[java]
-symbol = " "
-format = " java [${symbol}(${version} )]($style)"
-
-[lua]
-format = " [lua](italic) [${symbol}${version}]($style)"
-version_format = "${raw}"
-symbol = "⨀ "
-style = "bold bright-yellow"
-
-[nim]
-symbol = "▴▲▴ "
-format = " nim [$symbol($version )]($style)"
+style = "bg:color_aqua"
+format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)'
 
 [nodejs]
-format = " [node](italic) [($version)](bold bright-green)"
-version_format = "${raw}"
-detect_files = ["package-lock.json", "yarn.lock", "bun.lockb", "pnpm-lock.yaml"]
-detect_folders = ["node_modules"]
-detect_extensions = []
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
-[python]
-format = " [py](italic) [${symbol}${version}]($style)"
-symbol = "[⌉](bold bright-blue)⌊ "
-version_format = "${raw}"
-style = "bold bright-yellow"
-
-[ruby]
-format = " [rb](italic) [${symbol}${version}]($style)"
-symbol = "◆ "
-version_format = "${raw}"
-style = "bold red"
+[c]
+symbol = " "
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
 [rust]
-format = " [rs](italic) [$symbol$version]($style)"
-symbol = "⊃ "
-version_format = "${raw}"
-style = "bold red"
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
-[swift]
-format = " [sw](italic) [${symbol}${version}]($style)"
-symbol = "◁ "
-style = "bold bright-red"
-version_format = "${raw}"
+[golang]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
-[memory_usage]
-symbol = "▪▫▪ "
-format = " mem [${ram}( ${swap})]($style)"
+[php]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
-[battery]
-format = "[ $percentage]($style)"
-# charging_symbol = "[↑](italic bold green)"
-# discharging_symbol = "[↓](italic bold red)"
-# full_symbol = "█"
-# unknown_symbol = "░"
-# empty_symbol = "▃"
+[java]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
-[[battery.display]]
-threshold = 20
-style = "italic bold red"
+[kotlin]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
-[[battery.display]]
-threshold = 60
-style = "italic dimmed yellow"
+[haskell]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
-[[battery.display]]
-threshold = 70
-style = "italic dimmed green"
+[python]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+[docker_context]
+symbol = ""
+style = "bg:color_bg3"
+format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
+
+[conda]
+style = "bg:color_bg3"
+format = '[[ $symbol( $environment) ](fg:#83a598 bg:color_bg3)]($style)'
 
 [time]
 disabled = false
-format = "[ $time]($style)"
-time_format = "%T"
-utc_time_offset = "local"
-style = "italic dimmed white"
+time_format = "%R"
+style = "bg:color_bg1"
+format = '[[  $time ](fg:color_fg0 bg:color_bg1)]($style)'
+
+[line_break]
+disabled = false
+
+[character]
+disabled = false
+success_symbol = '[](bold fg:color_green)'
+error_symbol = '[](bold fg:color_red)'
+vimcmd_symbol = '[](bold fg:color_green)'
+vimcmd_replace_one_symbol = '[](bold fg:color_purple)'
+vimcmd_replace_symbol = '[](bold fg:color_purple)'
+vimcmd_visual_symbol = '[](bold fg:color_yellow)'
