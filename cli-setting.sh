@@ -6,14 +6,14 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Install Cask
 echo "📦 Installing Fomulars and Casks Using homebrew"
 brew install bat fzf fnm eza go fastfetch openjdk@21 portal ripgrep thefuck tree zoxide zsh-autosuggestions zsh-syntax-highlighting starship oven-sh/bun/bun neovim git-delta
-brew install --cask font-fira-code-nerd-font orbstack google-chrome raycast slack notion wezterm beekeeper-studio visual-studio-code karabiner-elements spotify keycastr bruno
+brew install --cask font-fira-code-nerd-font orbstack google-chrome raycast slack notion ghostty beekeeper-studio visual-studio-code karabiner-elements keycastr bruno
 
 # Set hushlogin
 touch ~/.hushlogin
 
 # Set Fnm and yarn before .zsh setting
 eval "$(fnm env --use-on-cd)"
-fnm install 20.17.0
+fnm install 22.17.0
 npm install --global yarn
 
 
