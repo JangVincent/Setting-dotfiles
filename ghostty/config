@@ -1,0 +1,32 @@
+background = 000000
+background-opacity = 0.7 
+background-blur = true
+
+window-padding-x = 10
+window-padding-y = 5
+window-position-x = 1000
+window-position-y = 0
+
+macos-titlebar-style = transparent
+
+font-family = FiraCode Nerd Font
+font-size = 11
+
+keybind = ctrl+-=new_split:down
+keybind = ctrl+|=new_split:right
+
+keybind = ctrl+j=resize_split:down,10
+keybind = ctrl+k=resize_split:up,10
+keybind = ctrl+h=resize_split:left,10
+keybind = ctrl+l=resize_split:right,10
+
+keybind = ctrl+up=goto_split:up
+keybind = ctrl+down=goto_split:down
+keybind = ctrl+right=goto_split:right
+keybind = ctrl+left=goto_split:left
+
+keybind = ctrl+[=goto_split:previous
+keybind = ctrl+]=goto_split:next
+
+
+
