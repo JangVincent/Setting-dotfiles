@@ -6,7 +6,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Install Cask
 echo "📦 Installing Fomulars and Casks Using homebrew"
 brew install bat fzf fnm eza go fastfetch openjdk@21 portal ripgrep thefuck tree zoxide zsh-autosuggestions zsh-syntax-highlighting starship oven-sh/bun/bun neovim git-delta
-brew install --cask font-fira-code-nerd-font orbstack google-chrome raycast slack notion ghostty beekeeper-studio visual-studio-code karabiner-elements keycastr bruno
+brew install --cask font-fira-code-nerd-font orbstack google-chrome raycast slack notion ghostty beekeeper-studio cursor karabiner-elements keycastr bruno
 
 # Set hushlogin
 touch ~/.hushlogin
@@ -85,6 +85,8 @@ EOF
 ## .zshrc에 내용 추가
 echo "$ZSH_CONTENT" >> ~/.zshrc
 source ~/.zshrc
+
+defaults write “$(osascript -e ‘id of app “Cursor”’)” ApplePressAndHoldEnabled -bool false
 
 ## 완료 메시지
 echo "📦 Setting .zshrc Complete"
