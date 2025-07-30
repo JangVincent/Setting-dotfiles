@@ -101,3 +101,4 @@ defaults write “$(osascript -e ‘id of app “Cursor”’)” ApplePressAndH
 
 ## 완료 메시지
 echo "📦 Setting .zshrc Complete"
+echo "📦 For Develop flutter, visit https://docs.flutter.dev/get-started/install/macos/mobile-ios"
