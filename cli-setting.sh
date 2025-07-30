@@ -16,6 +16,11 @@ eval "$(fnm env --use-on-cd)"
 fnm install 22.17.0
 npm install --global yarn
 
+# ruby
+eval "$(rbenv init - --no-rehash zsh)"
+rbenv install 3.3.9
+rbenv global 3.3.9
+gem install bundler
 
 # Set .zshrc
 touch ~/.zshrc
@@ -35,6 +40,12 @@ export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
 
 # Go install path
 export PATH="$HOME/go/bin:$PATH"
+
+# Flutter install path
+export PATH=$HOME/flutter/bin:$PATH
+
+# Ruby gem
+export PATH=$HOME/.gem/bin:$PATH
 
 # the Fuck
 eval $(thefuck --alias fuck)
