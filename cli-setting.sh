@@ -80,15 +80,6 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 source <(fzf --zsh)
 export FZF_DEFAULT_OPTS="--preview 'bat --color=always {}'"
 
-# git log custom
-git() {
-  if [[ $1 == "log" ]]; then
-    command git log --date=short --pretty=format:"%C(yellow)%h%Creset - %C(cyan)%an%Creset, %C(green)%ad%Creset : %C(magenta)%s%Creset %C(auto)%d%Creset"
-  else
-    command git "$@"
-  fi
-}
-
 fastfetch
 EOF
 )
