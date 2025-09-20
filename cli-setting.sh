@@ -6,24 +6,28 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Install Cask
 echo "📦 Installing Fomulars and Casks Using homebrew"
 brew 
-brew install bat fzf fnm eza go fastfetch openjdk@21 portal ripgrep thefuck tree zoxide zsh-autosuggestions zsh-syntax-highlighting starship oven-sh/bun/bun neovim git-delta gemini-cli hashicorp/tap/terraform
+brew install bat fzf fnm eza go fastfetch openjdk@21 portal ripgrep thefuck tree zoxide zsh-autosuggestions zsh-syntax-highlighting starship oven-sh/bun/bun rbenv neovim git-delta gemini-cli hashicorp/tap/terraform
 brew install --cask font-fira-code-nerd-font orbstack google-chrome zen raycast slack notion ghostty beekeeper-studio cursor karabiner-elements visual-studio-code bruno chatgpt
 
 # Set hushlogin
+echo "📦 Setting hushlogin for terminal environment"
 touch ~/.hushlogin
 
 # Set Fnm and yarn before .zsh setting
+echo "📦 Install NodeJS LTS and Yarn"
 eval "$(fnm env --use-on-cd)"
-fnm install 22.17.0
-npm install --global yarn
+fnm install lts/latest
+npm install --global yarn pnpm
 
 # ruby
+echo "📦 Install Ruby"
 eval "$(rbenv init - --no-rehash zsh)"
-rbenv install 3.3.9
-rbenv global 3.3.9
+rbenv install 3.4.6
+rbenv global 3.4.6
 gem install bundler
 
 # Set .zshrc
+echo "📦 Setting .zshrc"
 touch ~/.zshrc
 
 ZSH_CONTENT=$(cat << 'EOF'
@@ -35,6 +39,9 @@ eval "$(fnm env --use-on-cd)"
 
 # Yarn
 export PATH="$PATH:$(yarn global bin)"
+
+# Pnpm
+alias pn=pnpm
 
 # open JDK
 export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
@@ -61,8 +68,8 @@ alias ls="eza -alf --color=always --sort=size | grep -v /"
 alias lt="eza -al --sort=modified"
 alias l="ll"
 
-alias cd="z"
 eval "$(zoxide init zsh)"
+alias cd="z"
 
 alias diff="delta"
 
@@ -85,12 +92,14 @@ fastfetch
 EOF
 )
 
-## .zshrc에 내용 추가
 echo "$ZSH_CONTENT" >> ~/.zshrc
 source ~/.zshrc
-
-defaults write “$(osascript -e ‘id of app “Cursor”’)” ApplePressAndHoldEnabled -bool false
-
-## 완료 메시지
 echo "📦 Setting .zshrc Complete"
+
+# ApplePressAndHoldEnabled for VSCode, Cursor
+echo "📦 Setting VIM mode for vscode and cursor"
+defaults write “$(osascript -e ‘id of app “Cursor”’)” ApplePressAndHoldEnabled -bool false
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false 
+
+
 echo "📦 For Develop flutter, visit https://docs.flutter.dev/get-started/install/macos/mobile-ios"
