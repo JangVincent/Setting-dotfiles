@@ -101,5 +101,10 @@ echo "📦 Setting VIM mode for vscode and cursor"
 defaults write “$(osascript -e ‘id of app “Cursor”’)” ApplePressAndHoldEnabled -bool false
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false 
 
+# AWS-CLI
+echo "📦 Setting AWS CLI"
+curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+sudo installer -pkg AWSCLIV2.pkg -target /
 
 echo "📦 For Develop flutter, visit https://docs.flutter.dev/get-started/install/macos/mobile-ios"
+echo "✅ All cli setting is done. Let's hack!"
