@@ -98,7 +98,7 @@ echo "📦 Setting .zshrc Complete"
 
 # ApplePressAndHoldEnabled for VSCode, Cursor
 echo "📦 Setting VIM mode for vscode and cursor"
-defaults write “$(osascript -e ‘id of app “Cursor”’)” ApplePressAndHoldEnabled -bool false
+defaults write "$(osascript -e 'id of app "Cursor"')" ApplePressAndHoldEnabled -bool false
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false 
 
 # AWS-CLI
