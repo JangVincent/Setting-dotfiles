@@ -15,10 +15,10 @@ font-size = 11
 keybind = ctrl+-=new_split:down
 keybind = ctrl+|=new_split:right
 
-keybind = ctrl+j=resize_split:down,10
-keybind = ctrl+k=resize_split:up,10
-keybind = ctrl+h=resize_split:left,10
-keybind = ctrl+l=resize_split:right,10
+keybind = opt+j=resize_split:down,10
+keybind = opt+k=resize_split:up,10
+keybind = opt+h=resize_split:left,10
+keybind = opt+l=resize_split:right,10
 
 keybind = ctrl+up=goto_split:up
 keybind = ctrl+down=goto_split:down
