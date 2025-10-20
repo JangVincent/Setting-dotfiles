@@ -171,4 +171,10 @@ curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 sudo installer -pkg AWSCLIV2.pkg -target /
 
 echo "📦 For Develop flutter, visit https://docs.flutter.dev/get-started/install/macos/mobile-ios"
+
+echo "💫TIPS💫"
+echo "↳ git log => gitlog"
+echo "↳ git branch => gitbranch"
+echo "↳ Ctrl + g => Find file with content of file"
+echo "↳ Ctrl + p => Find file with file name"
 echo "✅ All cli setting is done. Let's hack!"
