@@ -78,10 +78,7 @@ alias diff="delta"
 eval "$(zoxide init zsh)"
 alias cd="z"
 
-# FZF
-source <(fzf --zsh)
-export FZF_DEFAULT_OPTS="--preview 'bat --color=always {}'"
-# =================================================
+# ===================fzf setting=======================
 # git branch selection with fzf → checkout
 fbr() {
   local branch
@@ -99,8 +96,6 @@ fshow() {
 alias gitbranch=fbr
 alias gitlog=fshow
 
-# ==================================================
-#
 # fzf + ripgrep + bat + nvim Integration Search
 frg() {
   local root
@@ -109,7 +104,7 @@ frg() {
     fzf --ansi \
         --delimiter : \
         --preview 'bat --color=always --style=numbers --highlight-line {2} {1}' \
-        --bind 'enter:execute(nvim +{2} {1}),ctrl-d:preview-down,ctrl-u:preview-up' \
+        --bind 'enter:execute(nvim +{2} {1}),ctrl-j:preview-down,ctrl-k:preview-up' \
         --preview-window=down:60%:wrap
 }
 # Ctrl+G = execute frg (zle wiget)
@@ -126,7 +121,7 @@ ffile() {
   find . -type f \( ! -path '*/.git/*' \) |
     fzf --ansi \
         --preview 'bat --color=always --style=header,grid --line-range=:200 {}' \
-        --bind "enter:execute(nvim '{}'),ctrl-d:preview-down,ctrl-u:preview-up" \
+        --bind "enter:execute(nvim '{}'),ctrl-j:preview-down,ctrl-k:preview-up" \
         --preview-window=down:60%:wrap
 }
 
@@ -137,7 +132,7 @@ function ffile-widget() {
 }
 zle -N ffile-widget
 bindkey '^P' ffile-widget
-# ====================================================================================================
+# =========================================================
 
 
 # OrbStack command-line tools
@@ -150,6 +145,10 @@ source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 # Starship
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
+# FZF
+source <(fzf --zsh)
+export FZF_DEFAULT_OPTS="--preview 'bat --color=always {}'"
 
 fastfetch
 EOF
@@ -174,6 +173,13 @@ echo "📦 For Develop flutter, visit https://docs.flutter.dev/get-started/insta
 echo "💫TIPS💫"
 echo "↳ git log => gitlog"
 echo "↳ git branch => gitbranch"
+echo "↳ Ctrl + r => Find terminal history"
 echo "↳ Ctrl + g => Find file with content of file"
 echo "↳ Ctrl + p => Find file with file name"
+echo "↳ Ctrl + t => Find file with file name"
+echo "↳ In Ghostty : ctrl+-/| => split panel" 
+echo "↳ In Ghostty : opt+arrow => move between split panel" 
+echo "↳ In Ghostty : opt+h/j/k/l => resize of specific split panel" 
+echo "↳ In FZF : ctrl+j/k => preview scroll" 
+echo "↳ In FZF : ctrl+n/p => preview search list" 
 echo "✅ All cli setting is done. Let's hack!"
