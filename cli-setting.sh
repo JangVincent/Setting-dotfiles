@@ -7,7 +7,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 echo "📦 Installing Fomulars and Casks Using homebrew"
 brew 
 brew install git gnupg bat fzf fd fnm eza go fastfetch openjdk@21 portal ripgrep thefuck tree zoxide zsh-autosuggestions zsh-syntax-highlighting starship oven-sh/bun/bun rbenv neovim git-delta gemini-cli hashicorp/tap/terraform
-brew install --cask font-fira-code-nerd-font orbstack google-chrome zen raycast slack notion ghostty beekeeper-studio cursor karabiner-elements visual-studio-code bruno chatgpt spotify
+brew install --cask font-fira-code-nerd-font orbstack google-chrome zen raycast slack notion ghostty beekeeper-studio cursor karabiner-elements visual-studio-code yaak chatgpt spotify
 
 # Set hushlogin
 echo "📦 Setting hushlogin for terminal environment"
