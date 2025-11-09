@@ -6,8 +6,8 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Install Cask
 echo "📦 Installing Fomulars and Casks Using homebrew"
 brew 
-brew install git gnupg bat fzf fd fnm eza go fastfetch openjdk@21 portal ripgrep thefuck tree zoxide zsh-autosuggestions zsh-syntax-highlighting starship oven-sh/bun/bun rbenv neovim git-delta gemini-cli hashicorp/tap/terraform
-brew install --cask font-fira-code-nerd-font orbstack google-chrome zen raycast slack notion ghostty beekeeper-studio cursor karabiner-elements visual-studio-code yaak chatgpt spotify
+brew install git gnupg bat fzf fd fnm eza go fastfetch openjdk@21 pyenv ripgrep tree zoxide zsh-autosuggestions zsh-syntax-highlighting starship oven-sh/bun/bun rbenv neovim git-delta gemini-cli hashicorp/tap/terraform
+brew install --cask font-fira-code-nerd-font orbstack google-chrome raycast slack notion ghostty beekeeper-studio cursor karabiner-elements visual-studio-code yaak chatgpt spotify
 
 # Set hushlogin
 echo "📦 Setting hushlogin for terminal environment"
@@ -25,6 +25,9 @@ eval "$(rbenv init - --no-rehash zsh)"
 rbenv install 3.4.6
 rbenv global 3.4.6
 gem install bundler
+
+# python
+eval "$(pyenv init - zsh)"
 
 # Set .zshrc
 echo "📦 Setting .zshrc"
@@ -54,12 +57,6 @@ export PATH=$HOME/flutter/bin:$PATH
 
 # Ruby gem
 export PATH=$HOME/.gem/bin:$PATH
-
-# Python
-alias python="python3"
-
-# the Fuck
-eval $(thefuck --alias fuck)
 
 # =================custom alias====================
 alias cat="bat"
