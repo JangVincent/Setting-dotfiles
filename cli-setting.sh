@@ -6,7 +6,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Install Cask
 echo "📦 Installing Fomulars and Casks Using homebrew"
 brew 
-brew install git gnupg bat fzf fd fnm eza go fastfetch openjdk@21 uv ripgrep tree zoxide zsh-autosuggestions zsh-syntax-highlighting starship oven-sh/bun/bun rbenv neovim git-delta gemini-cli hashicorp/tap/terraform
+brew install git gnupg bat fzf fd fnm eza go fastfetch openjdk@21 uv ripgrep tree zoxide zsh-autosuggestions zsh-syntax-highlighting starship oven-sh/bun/bun rbenv neovim git-delta gemini-cli hashicorp/tap/terraform direnv
 brew install --cask font-fira-code-nerd-font orbstack google-chrome raycast slack notion ghostty beekeeper-studio cursor karabiner-elements visual-studio-code yaak chatgpt spotify
 
 # Set hushlogin
@@ -26,8 +26,6 @@ rbenv install 3.4.6
 rbenv global 3.4.6
 gem install bundler
 
-# python
-eval "$(pyenv init - zsh)"
 
 # Set .zshrc
 echo "📦 Setting .zshrc"
@@ -57,6 +55,11 @@ export PATH=$HOME/flutter/bin:$PATH
 
 # Ruby gem
 export PATH=$HOME/.gem/bin:$PATH
+
+# Direnv
+eval "$(direnv hook zsh)"
+direnv allow
+
 
 # =================custom alias====================
 alias cat="bat"
@@ -159,11 +162,6 @@ echo "📦 Setting .zshrc Complete"
 echo "📦 Setting VIM mode for vscode and cursor"
 defaults write "$(osascript -e 'id of app "Cursor"')" ApplePressAndHoldEnabled -bool false
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false 
-
-# AWS-CLI
-echo "📦 Setting AWS CLI"
-curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
-sudo installer -pkg AWSCLIV2.pkg -target /
 
 echo "📦 For Develop flutter, visit https://docs.flutter.dev/get-started/install/macos/mobile-ios"
 
