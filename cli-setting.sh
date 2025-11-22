@@ -58,7 +58,6 @@ export PATH=$HOME/.gem/bin:$PATH
 
 # Direnv
 eval "$(direnv hook zsh)"
-direnv allow
 
 
 # =================custom alias====================
