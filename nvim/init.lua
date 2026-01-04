@@ -8,9 +8,6 @@ vim.o.tabstop = 4
 vim.g.mapleader = " "
 vim.o.clipboard = 'unnamedplus'
 
-vim.keymap.set('n', '<leader>w', ":write<CR>")
-vim.keymap.set('n', '<leader>q', ":quit<CR>")
-
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/nvim-mini/mini.pairs" },
@@ -20,8 +17,7 @@ vim.pack.add({
 	{ src = "https://github.com/rebelot/kanagawa.nvim" }
 })
 
-
-require "mini.pairs".setup()
+-- Mini files
 require "mini.files".setup({
 	windows = {
 		preview = true,
@@ -36,7 +32,6 @@ require "mini.files".setup({
 		go_in = '<CR>'
 	}
 })
-
 local minifiles_toggle = function()
     if not MiniFiles.close() then
         MiniFiles.open()
@@ -44,15 +39,22 @@ local minifiles_toggle = function()
 end
 vim.keymap.set('n', '<leader>e', minifiles_toggle, { desc = 'Toggle MiniFiles' })
 
+-- Auto close pair characters
+require "mini.pairs".setup()
 
+-- LSP setup with Mason
 local language_server_list = { "lua_ls", "pyright", "jsonls", "html", "cssls", "yamlls", "dockerls", "terraformls", "sqlls", "clangd", "gopls", "rust_analyzer", "ts_ls" }
-
 require "mason".setup()
 require "mason-lspconfig".setup({
 	ensure_installed = language_server_list
 })
 vim.lsp.enable(language_server_list)
 
+-- Basic Key mapping
+vim.keymap.set('n', '<leader>w', ":write<CR>")
+vim.keymap.set('n', '<leader>q', ":quit<CR>")
+
+-- LSP Key Mapping
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'LSP Rename' })
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to Definition' }) -- 정의로 이동
@@ -86,7 +88,7 @@ vim.keymap.set('n', '<leader>sx', ':close<CR>', { desc = '현재 창 닫기' })
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
--- 투명 배경 설정
+-- Theme & 투명 배경 설정
 vim.cmd("colorscheme kanagawa-dragon")
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
@@ -96,3 +98,29 @@ vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 -- vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
 -- vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "none" })
+
+-- 터미널 전용 설정 (줄 번호 제거 및 터미널 모드 최적화)
+vim.api.nvim_create_autocmd("TermOpen", {
+    group = vim.api.nvim_create_augroup("custom-term-open", { clear = true }),
+    callback = function()
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
+        vim.opt_local.scrolloff = 0
+        vim.cmd("startinsert") -- 터미널 열자마자 입력 모드 진입
+    end,
+})
+
+-- 하단 가로 터미널 열기 (기존 ToggleTerm 대체)
+vim.keymap.set('n', '<C-`>', function()
+    vim.cmd("botright split | terminal")
+    vim.cmd("resize 15") -- 높이 조절
+end, { desc = '하단 터미널 열기' })
+
+
+-- 터미널 모드 탈출 및 창 이동 (필수)
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = '터미널 일반모드 전환' })
+vim.keymap.set('t', '<C-h>', [[<C-\><C-n><C-w>h]])
+vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-w>j]])
+vim.keymap.set('t', '<C-k>', [[<C-\><C-n><C-w>k]])
+vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-w>l]])
+
