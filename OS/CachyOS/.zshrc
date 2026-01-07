@@ -1,9 +1,3 @@
-# fnm
-eval "$(fnm env --use-on-cd)"
-
-# Yarn
-export PATH="$PATH:$(yarn global bin)"
-
 # Pnpm
 alias pn=pnpm
 
@@ -96,4 +90,14 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 source <(fzf --zsh)
 export FZF_DEFAULT_OPTS="--preview 'bat --color=always {}'"
 
-fastfetch
+# fnm
+FNM_PATH="/home/vincent/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "`fnm env`"
+fi
+
+# zsh-syntax-highlight
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
